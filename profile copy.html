@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Réserver Kiko | Booking Artist</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #000; color: white; overflow-x: hidden; }
+        .glass-effect { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
+        .spotify-green { background-color: #1DB954; }
+        /* Style personnalisé pour le calendrier */
+        .calendar-day:hover { background-color: #f3f4f6; color: #000; cursor: pointer; }
+        .calendar-selected { background-color: #000 !important; color: #fff !important; }
+    </style>
+</head>
+<body class="flex flex-col md:flex-row min-h-screen">
+
+    <div class="relative w-full md:w-1/2 h-[60vh] md:h-screen overflow-hidden border-r border-gray-800">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1501612780327-45045538702b?q=80&w=1000&auto=format&fit=crop" 
+                 class="w-full h-full object-cover opacity-60" alt="Live Performance">
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black"></div>
+        </div>
+
+        <div class="relative z-10 flex flex-col items-center justify-center h-full p-8 text-center">
+            <div class="w-32 h-32 md:w-44 md:h-44 rounded-full border-4 border-white shadow-2xl overflow-hidden mb-6">
+                <img src="https://avatars.githubusercontent.com/u/39957376?v=4" 
+                     class="w-full h-full object-cover" alt="Kiko Profile">
+            </div>
+
+            <h1 class="text-4xl md:text-5xl font-black tracking-tighter mb-2">KIKO <i class="fa-solid fa-circle-check text-blue-500 text-2xl"></i></h1>
+            <p class="text-gray-300 font-medium mb-6 uppercase tracking-widest text-sm">Afrobeat & RnB Artist</p>
+
+            <!-- Social Networks -->
+            <div class="flex gap-4 mb-2">
+                <a href="#" class="w-10 h-10 glass-effect rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-all">
+                    <i class="fa-brands fa-facebook"></i>
+                </a>
+                <a href="#" class="w-10 h-10 glass-effect rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-all">
+                    <i class="fa-brands fa-x"></i>
+                </a>
+                <a href="#" class="w-10 h-10 glass-effect rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-all">
+                    <i class="fa-brands fa-youtube"></i>
+                </a>
+                <a href="#" class="w-10 h-10 glass-effect rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-all">
+                    <i class="fa-brands fa-tiktok"></i>
+                </a>
+                <a href="#" class="w-10 h-10 glass-effect rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-all">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+            </div>
+            <!-- Streaming Platforms -->
+            <div class="flex gap-4 mb-8">
+                <a href="#" class="w-10 h-10 glass-effect rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-all">
+                    <i class="fa-brands fa-afreekaplay"></i>
+                </a>
+                <a href="#" class="w-10 h-10 glass-effect rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-all">
+                    <i class="fa-brands fa-spotify"></i>
+                </a>
+                <a href="#" class="w-10 h-10 glass-effect rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-all">
+                    <i class="fa-brands fa-deezer"></i>
+                </a>
+                <a href="#" class="w-10 h-10 glass-effect rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-all">
+                    <i class="fa-brands fa-applemusic"></i>
+                </a>
+            </div>
+
+            <!-- Music Releases -->
+            <div class="w-full max-w-sm space-y-3">
+                <h3>Muisque</h3>
+                <div class="glass-effect p-3 rounded-xl flex items-center gap-3 cursor-pointer hover:bg-white/10 transition-colors text-left">
+                    <div class="w-10 h-10 bg-togored rounded-lg flex items-center justify-center"><i class="fa-solid fa-play text-xs"></i></div>
+                    <div>
+                        <p class="text-sm font-bold">Dernier Single "To Go"</p>
+                        <p class="text-[10px] text-gray-400">Disponible partout</p>
+                    </div>
+                </div>
+                <div class="glass-effect p-3 rounded-xl flex items-center gap-3 cursor-pointer hover:bg-white/10 transition-colors text-left">
+                    <div class="w-10 h-10 bg-togored rounded-lg flex items-center justify-center"><i class="fa-solid fa-play text-xs"></i></div>
+                    <div>
+                        <p class="text-sm font-bold">Dernier Album "The Golden Boy"</p>
+                        <p class="text-[10px] text-gray-400">Disponible partout</p>
+                    </div>
+                </div>
+                <div class="glass-effect p-3 rounded-xl flex items-center gap-3 cursor-pointer hover:bg-white/10 transition-colors text-left">
+                    <div class="w-10 h-10 bg-togored rounded-lg flex items-center justify-center"><i class="fa-solid fa-play text-xs"></i></div>
+                    <div>
+                        <p class="text-sm font-bold">Dernier Feat "The Golden Boy"</p>
+                        <p class="text-[10px] text-gray-400">Disponible partout</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Shop -->
+            <div class="w-full max-w-sm mt-6 space-y-3">
+                <h3>Boutique</h3>
+                <div class="glass-effect p-3 rounded-xl flex items-center gap-3 cursor-pointer hover:bg-white/10 transition-colors text-left">
+                    <div class="w-10 h-10 bg-togored rounded-lg flex items-center justify-center"><i class="fa-solid fa-shopping-cart text-xs"></i></div>
+                    <div>
+                        <p class="text-sm font-bold">T-shirt "KIKO"</p>
+                        <p class="text-[10px] text-gray-400">Disponible sur la boutique</p>
+                    </div>
+                </div>
+                <div class="glass-effect p-3 rounded-xl flex items-center gap-3 cursor-pointer hover:bg-white/10 transition-colors text-left">
+                    <div class="w-10 h-10 bg-togored rounded-lg flex items-center justify-center"><i class="fa-solid fa-shopping-cart text-xs"></i></div>
+                    <div>
+                        <p class="text-sm font-bold">Casquette "KIKO"</p>
+                        <p class="text-[10px] text-gray-400">Disponible sur la boutique</p>
+                    </div>
+                </div>
+                <div class="glass-effect p-3 rounded-xl flex items-center gap-3 cursor-pointer hover:bg-white/10 transition-colors text-left">
+                    <div class="w-10 h-10 bg-togored rounded-lg flex items-center justify-center"><i class="fa-solid fa-shopping-cart text-xs"></i></div>
+                    <div>
+                        <p class="text-sm font-bold">Posters "KIKO"</p>
+                        <p class="text-[10px] text-gray-400">Disponible sur la boutique</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="w-full md:w-1/2 bg-white text-black p-8 md:p-16 flex flex-col justify-center">
+        
+        <div class="mb-10 text-center md:text-left">
+            <h2 class="text-3xl font-black mb-4">Réserver une prestation</h2>
+            <p class="text-gray-500 mb-6 font-medium">Sélectionnez une date pour bloquer l'artiste.</p>
+            
+            <button class="spotify-green text-white w-full py-5 rounded-2xl font-black text-xl shadow-xl hover:scale-[1.02] transition-transform flex items-center justify-center gap-4 mb-4">
+                <i class="fa-solid fa-bolt"></i>
+                RÉSERVER KIKO
+            </button>
+            
+            <div class="flex items-center justify-center md:justify-start gap-4 text-xs font-bold text-gray-400 uppercase tracking-tighter">
+                <span class="flex items-center gap-1"><i class="fa-solid fa-shield-check spotify-green text-white rounded-full p-0.5"></i> Mixx by Yas</span>
+                <span class="flex items-center gap-1"><i class="fa-solid fa-shield-check spotify-green text-white rounded-full p-0.5"></i> Moov Money</span>
+                <span class="text-togogreen">SÉCURISÉ</span>
+            </div>
+        </div>
+
+        <div class="border rounded-2xl overflow-hidden shadow-sm">
+            <div class="bg-gray-50 p-4 border-b flex justify-between items-center">
+                <span class="font-bold">Avril 2026</span>
+                <div class="flex gap-4">
+                    <i class="fa-solid fa-chevron-left cursor-pointer"></i>
+                    <i class="fa-solid fa-chevron-right cursor-pointer"></i>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-7 text-center text-xs font-bold text-gray-400 py-4 bg-white">
+                <span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span><span>D</span>
+            </div>
+            
+            <div class="grid grid-cols-7 gap-px bg-gray-100 pb-px">
+                <div class="bg-white p-4 calendar-day text-gray-300">30</div>
+                <div class="bg-white p-4 calendar-day text-gray-300">31</div>
+                <div class="bg-white p-4 calendar-day">1</div>
+                <div class="bg-white p-4 calendar-day">2</div>
+                <div class="bg-white p-4 calendar-day">3</div>
+                <div class="bg-white p-4 calendar-day bg-red-50 text-red-500 font-bold">4</div>
+                <div class="bg-white p-4 calendar-day calendar-selected font-bold">5</div> <div class="bg-white p-4 calendar-day">6</div>
+                <div class="bg-white p-4 calendar-day">7</div>
+                <div class="bg-white p-4 calendar-day font-bold border-b-2 border-black">8</div> <div class="bg-white p-4 calendar-day">9</div>
+                <div class="bg-white p-4 calendar-day">10</div>
+                <div class="bg-white p-4 calendar-day font-bold border-b-2 border-black">11</div>
+                <div class="bg-white p-4 calendar-day">12</div>
+            </div>
+
+            <div class="p-6 bg-gray-50 flex flex-wrap gap-3">
+                <div class="px-4 py-2 border bg-white rounded-full text-sm font-bold hover:bg-black hover:text-white cursor-pointer transition-colors">20:00</div>
+                <div class="px-4 py-2 border bg-white rounded-full text-sm font-bold hover:bg-black hover:text-white cursor-pointer transition-colors">21:30</div>
+                <div class="px-4 py-2 border bg-white rounded-full text-sm font-bold hover:bg-black hover:text-white cursor-pointer transition-colors">23:00</div>
+            </div>
+        </div>
+
+        <footer class="mt-8 text-center text-[10px] text-gray-400 font-bold uppercase tracking-widest">
+            Une plateforme propulsée par bookingartist.tg
+        </footer>
+    </div>
+
+</body>
+</html>
