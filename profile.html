@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiko - Réserver sur Booking Artist Togo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #121212; color: white; font-family: 'Circular', sans-serif; }
+        .spotify-green { color: #1DB954; }
+        .bg-spotify-green { background-color: #1DB954; }
+        .bg-spotify-card { background-color: #181818; transition: background-color 0.3s; }
+        .bg-spotify-card:hover { background-color: #282828; }
+        
+        /* Personnalisation de l'ombre pour le bouton principal */
+        .cta-shadow { box-shadow: 0 4px 60px rgba(29, 185, 84, 0.5); }
+    </style>
+</head>
+<body class="p-6 md:p-12">
+
+    <header class="max-w-xl mx-auto text-center mb-10">
+        <div class="relative w-28 h-28 mx-auto mb-6">
+            <img src="https://images.unsplash.com/photo-1549497538-303791108f94?q=80&w=300&auto=format&fit=crop" alt="Kiko" class="rounded-full shadow-2xl object-cover border-4 border-[#121212]">
+            <div class="absolute -bottom-1 -right-1 bg-white p-1.5 rounded-full shadow-lg">
+                <i class="fa-solid fa-compact-disc text-black text-xs"></i>
+            </div>
+        </div>
+        
+        <h1 class="text-3xl font-black mb-1">Kiko<i class="fa-solid fa-check-circle ml-2 text-blue-500 text-sm"></i></h1>
+        <p class="text-gray-400 text-sm mb-6">Lomé, Togo | Afrobeat, RnB</p>
+        
+        <div class="flex justify-center gap-6 text-gray-400 text-xl mb-10">
+            <a href="#" class="hover:text-white"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="hover:text-white"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="#" class="hover:text-white"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#" class="hover:text-white"><i class="fa-brands fa-spotify"></i></a>
+        </div>
+
+        <button class="bg-spotify-green text-black w-full py-5 rounded-full font-black text-lg hover:scale-105 transition-transform cta-shadow mb-6 flex items-center justify-center gap-3">
+            <i class="fa-solid fa-calendar-check text-xl"></i>
+            RÉSERVER KIKO
+        </button>
+        <p class="text-xs text-gray-500">Paiement via T-Money & Flooz sécurisé.</p>
+    </header>
+
+    <main class="max-w-xl mx-auto space-y-6 mb-12">
+        
+        <h2 class="text-gray-400 text-xs font-bold uppercase tracking-widest text-center">Dernière Musique</h2>
+
+        <div class="bg-spotify-card p-4 rounded-xl cursor-pointer group flex items-center gap-4 border border-gray-800 hover:border-gray-600">
+            <img src="https://images.unsplash.com/photo-1493225255756-d9584f8606e9?q=80&w=150&auto=format&fit=crop" alt="Pochette Album" class="w-16 h-16 rounded-lg object-cover shadow-lg">
+            <div class="flex-grow">
+                <h3 class="font-bold mb-1 truncate text-lg">Dernier Single "To Go"</h3>
+                <p class="text-gray-400 text-sm">Écouter sur toutes les plateformes</p>
+            </div>
+            <i class="fa-solid fa-arrow-right-long text-gray-600 text-lg group-hover:text-white transition-colors"></i>
+        </div>
+
+        <div class="bg-spotify-card p-4 rounded-xl cursor-pointer group flex items-center gap-4 border border-gray-800 hover:border-gray-600">
+            <div class="w-16 h-16 rounded-lg bg-gray-700 flex items-center justify-center text-red-500 text-3xl">
+                <i class="fa-brands fa-youtube"></i>
+            </div>
+            <div class="flex-grow">
+                <h3 class="font-bold mb-1 truncate text-lg">Performance Live @ Festival</h3>
+                <p class="text-gray-400 text-sm">Regarder sur YouTube</p>
+            </div>
+            <i class="fa-solid fa-arrow-right-long text-gray-600 text-lg group-hover:text-white transition-colors"></i>
+        </div>
+
+    </main>
+
+    <footer class="max-w-xl mx-auto text-center border-t border-gray-800 pt-8 text-gray-600 text-xs">
+        <p class="mb-2">Centralisez vos liens & réservations</p>
+        <p class="font-bold">bookingartist.tg<i class="fa-solid fa-lock text-gray-600 ml-1"></i></p>
+    </footer>
+
+</body>
+</html>
