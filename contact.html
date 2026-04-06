@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apé Artist | Ambiancez vos évènements</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+        body { background-color: #121212; color: white; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        .spotify-green { color: #1DB954; }
+        .bg-spotify-green { background-color: #1DB954; }
+        .bg-spotify-card { background-color: #181818; transition: all 0.3s ease; }
+        .bg-spotify-card:hover { background-color: #282828; transform: translateY(-5px); }
+        .gradient-hero { background: linear-gradient(0deg, #121212 0%, #1db95422 100%); }
+        
+        /* FAQ Accordion Logic */
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+        .faq-item.active .faq-answer { max-height: 500px; padding-top: 1rem; }
+        .faq-item.active i { transform: rotate(180deg); color: #1DB954; }
+
+        .step-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav class="sticky top-0 bg-[#121212]/95 backdrop-blur-md z-50 border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 py-4 flex items-center justify-between">
+            <a href="index.html" class="text-2xl font-black tracking-tighter flex items-center">
+                <i class="fa-solid fa-compact-disc mr-2 spotify-green"></i>
+                APÉ<span class="spotify-green">ARTIST</span>
+            </a>
+            <div class="hidden md:flex space-x-8 font-bold text-xs uppercase tracking-widest">
+                <a href="#artists" class="hover:text-white text-gray-400 transition-colors">Artistes</a>
+                <a href="#how-it-works" class="hover:text-white text-gray-400 transition-colors">Comment ça marche</a>
+                <a href="#faq" class="hover:text-white text-gray-400 transition-colors">Aide</a>
+            </div>
+            <button class="bg-white text-black px-6 py-2.5 rounded-full font-black hover:scale-105 transition-transform text-xs uppercase">
+                S'INSCRIRE
+            </button>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="py-12 px-6 text-center">
+        <h1 class="text-4xl md:text-6xl font-black mb-6 tracking-tighter uppercase">Parlons de votre <br><span class="spotify-green-text">prochain projet</span></h1>
+        <p class="text-gray-400 max-w-xl mx-auto font-medium">
+            Une question sur une réservation, un problème technique ou une demande de partenariat ? Notre équipe vous répond sous 24h.
+        </p>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-6 pb-24 grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- Infos de Contact (1/3) -->
+        <div class="space-y-6">
+            <div class="glass-card p-8">
+                <h3 class="text-xs font-black uppercase tracking-widest text-gray-500 mb-6">Canaux de support</h3>
+                
+                <div class="space-y-8">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center shrink-0">
+                            <i class="fa-solid fa-envelope spotify-green-text"></i>
+                        </div>
+                        <div>
+                            <p class="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-1">Email</p>
+                            <p class="font-bold">support@bookingartist.tg</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center shrink-0">
+                            <i class="fa-brands fa-whatsapp spotify-green-text text-lg"></i>
+                        </div>
+                        <div>
+                            <p class="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-1">WhatsApp Support</p>
+                            <p class="font-bold">+228 90 00 00 00</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center shrink-0">
+                            <i class="fa-solid fa-location-dot spotify-green-text"></i>
+                        </div>
+                        <div>
+                            <p class="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-1">Bureau</p>
+                            <p class="font-bold">Quartier Administratif,<br>Lomé, Togo</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card p-8">
+                <h3 class="text-xs font-black uppercase tracking-widest text-gray-500 mb-4">Suivez-nous</h3>
+                <div class="flex gap-4">
+                    <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Formulaire de Contact (2/3) -->
+        <div class="lg:col-span-2">
+            <form class="glass-card p-8 md:p-12 space-y-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-2">Nom complet</label>
+                        <input type="text" placeholder="Ex: Jean Dupont" class="w-full p-4 input-field text-white">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-2">Adresse Email</label>
+                        <input type="email" placeholder="jean@exemple.com" class="w-full p-4 input-field text-white">
+                    </div>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-2">Sujet de votre message</label>
+                    <select class="w-full p-4 input-field text-white appearance-none">
+                        <option>Question sur une réservation</option>
+                        <option>Devenir artiste partenaire</option>
+                        <option>Support technique</option>
+                        <option>Presse & Partenariats</option>
+                    </select>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-2">Votre Message</label>
+                    <textarea rows="6" placeholder="Dites-nous tout..." class="w-full p-4 input-field text-white resize-none"></textarea>
+                </div>
+
+                <button type="submit" class="w-full spotify-green-bg text-black font-black uppercase tracking-widest py-5 rounded-2xl hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-green-500/20">
+                    Envoyer le message
+                </button>
+            </form>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-black py-16 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8 mb-12">
+                <a href="index.html" class="text-2xl font-black tracking-tighter">
+                    APÉ<span class="spotify-green">ARTIST</span>
+                </a>
+                <div class="flex space-x-8 text-gray-500 font-bold text-xs uppercase tracking-widest">
+                    <a href="confidentialites.html" class="hover:text-white transition-colors">Confidentialité</a>
+                    <a href="cgu.html" class="hover:text-white transition-colors">CGU</a>
+                    <a href="contact.html" class="hover:text-white transition-colors">Contact</a>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-all"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-all"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-all"><i class="fa-brands fa-tiktok"></i></a>
+                </div>
+            </div>
+            <div class="text-center text-[10px] text-gray-600 font-bold uppercase tracking-[0.4em]">
+                © 2026 APÉ ARTIST TOGO. TOUS TALENTS RÉSERVÉS.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleFaq(element) {
+            // Close other FAQ items
+            document.querySelectorAll('.faq-item').forEach(item => {
+                if (item !== element) {
+                    item.classList.remove('active');
+                }
+            });
+            // Toggle current item
+            element.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
