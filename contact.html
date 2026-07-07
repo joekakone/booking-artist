@@ -95,7 +95,7 @@
                                 <i class="fa-brands fa-whatsapp text-xl"></i>
                             </div>
                             <div>
-                                <p class="text-[9px] font-black text-gray-500 uppercase tracking-widest mb-0.5">WhatsApp Support</p>
+                                <p class="text-[9px] font-black text-gray-500 uppercase tracking-widest mb-0.5">Support WhatsApp</p>
                                 <p class="font-bold text-lg">+228 90 00 00 00</p>
                             </div>
                         </div>
@@ -116,46 +116,48 @@
                     <div class="space-y-6 pt-4">
                         <h3 class="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500">Suivez-nous</h3>
                         <div class="flex gap-4">
-                            <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center social-icon hover:bg-white hover:text-black">
-                                <i class="fa-brands fa-instagram"></i>
-                            </a>
-                            <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center social-icon hover:bg-white hover:text-black">
-                                <i class="fa-brands fa-facebook-f text-sm"></i>
-                            </a>
-                            <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center social-icon hover:bg-white hover:text-black">
-                                <i class="fa-brands fa-linkedin-in text-sm"></i>
-                            </a>
+                            <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center social-icon hover:bg-white hover:text-black"><i class="fa-brands fa-facebook-f"></i></a>
+                            <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center social-icon hover:bg-white hover:text-black"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center social-icon hover:bg-white hover:text-black"><i class="fa-brands fa-tiktok"></i></a>
                         </div>
                     </div>
                 </div>
 
                 <!-- Formulaire -->
                 <div class="lg:w-2/3">
-                    <form class="space-y-8">
+                    <form id="contactForm" class="space-y-8">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
                             <div>
-                                <label class="label-style">Nom complet</label>
-                                <input type="text" placeholder="Ex: Jean Dupont" class="w-full input-white outline-none focus:ring-2 focus:ring-[#1DB954]/50 transition-all">
+                                <input type="name" id="InputFirstName" placeholder="Prénom" class="w-full input-white outline-none focus:ring-2 focus:ring-[#1DB954]/50 transition-all" required>
                             </div>
                             <div>
-                                <label class="label-style">Adresse Email</label>
-                                <input type="email" placeholder="jean@exemple.com" class="w-full input-white outline-none focus:ring-2 focus:ring-[#1DB954]/50 transition-all">
+                                <input type="name" id="InputLastName" placeholder="Nom" class="w-full input-white outline-none focus:ring-2 focus:ring-[#1DB954]/50 transition-all" required>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+                            <div>
+                                <input type="text" id="InputPhone" placeholder="Numéro de téléphone" class="w-full input-white outline-none focus:ring-2 focus:ring-[#1DB954]/50 transition-all" required>
+                            </div>
+                            <div>
+                                <input type="email" id="InputEmail" placeholder="Adresse Email" class="w-full input-white outline-none focus:ring-2 focus:ring-[#1DB954]/50 transition-all" required>
                             </div>
                         </div>
 
                         <div>
-                            <label class="label-style">Sujet de votre message</label>
-                            <input type="text" placeholder="Comment pouvons-nous vous aider ?" class="w-full input-white outline-none focus:ring-2 focus:ring-[#1DB954]/50 transition-all">
+                            <input type="text" id="InputSubject" placeholder="Objet de votre message" class="w-full input-white outline-none focus:ring-2 focus:ring-[#1DB954]/50 transition-all" required>
                         </div>
 
                         <div>
-                            <label class="label-style">Votre Message</label>
-                            <textarea rows="5" placeholder="Dites-nous tout..." class="w-full input-white resize-none outline-none focus:ring-2 focus:ring-[#1DB954]/50 transition-all"></textarea>
+                            <textarea id="InputMessage" rows="5" placeholder="Écrivez votre message ici" class="w-full input-white resize-none outline-none focus:ring-2 focus:ring-[#1DB954]/50 transition-all" required></textarea>
                         </div>
 
-                        <div class="pt-2">
-                            <button type="submit" class="w-full bg-[#1DB954] text-black font-black uppercase tracking-[0.2em] py-5 rounded-lg hover:scale-[1.01] active:scale-95 transition-all btn-glow text-sm">
-                                Envoyer le message
+                        <div class="pt-2 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+                            <button type="button" onclick="contact.sendByWhatsapp(event)" class="w-full bg-[#1DB954] text-black font-black uppercase tracking-[0.2em] py-5 rounded-lg hover:scale-[1.01] active:scale-95 transition-all btn-glow text-sm">
+                                Envoyer via WhatsApp
+                            </button>
+                            <button type="button" onclick="contact.sendByMail(event)" class="w-full bg-white text-black font-black uppercase tracking-[0.2em] py-5 rounded-lg hover:scale-[1.01] active:scale-95 transition-all btn-glow text-sm">
+                                Envoyer via Email
                             </button>
                         </div>
                     </form>
@@ -188,6 +190,21 @@
             </div>
         </div>
     </footer>
+
+
+    <script src="https://joekakone.github.io/contact-form-js/script.js"></script>
+    <script>
+        const contact = ContactForm.create({
+            formId: "contactForm",
+            email: {
+                to: "joseph.kakone@gmail.com",
+            },
+            whatsapp: {
+                number: "22891518923",
+            },
+            language: "fr",
+        });
+    </script>
 
     <script>
         function toggleFaq(element) {
