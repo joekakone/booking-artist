@@ -8,22 +8,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="static/img/favicon.svg">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
-        body { background-color: #121212; color: white; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
-        .spotify-green { color: #1DB954; }
-        .bg-spotify-green { background-color: #1DB954; }
-        .bg-spotify-card { background-color: #181818; transition: all 0.3s ease; }
-        .bg-spotify-card:hover { background-color: #282828; transform: translateY(-5px); }
-        .gradient-hero { background: linear-gradient(0deg, #121212 0%, #1db95422 100%); }
-        
-        /* FAQ Accordion Logic */
-        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
-        .faq-item.active .faq-answer { max-height: 500px; padding-top: 1rem; }
-        .faq-item.active i { transform: rotate(180deg); color: #1DB954; }
-
-        .step-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); }
-    </style>
+    <link rel="stylesheet" href="static/css/custom.css">
 </head>
 <body>
 
@@ -164,17 +149,6 @@
         </div>
     </footer>
 
-    <script>
-        function toggleFaq(element) {
-            // Close other FAQ items
-            document.querySelectorAll('.faq-item').forEach(item => {
-                if (item !== element) {
-                    item.classList.remove('active');
-                }
-            });
-            // Toggle current item
-            element.classList.toggle('active');
-        }
-    </script>
+    <script src="static/js/custom.js"></script>
 </body>
 </html>

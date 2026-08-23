@@ -8,7 +8,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="static/img/favicon.svg">
-    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="static/css/custom.css">
 </head>
 <body class="min-h-screen flex flex-col justify-between">
 
@@ -40,7 +40,7 @@
         <div class="w-full max-w-[540px]">
             
             <!-- Auth Card -->
-            <div class="auth-card p-8 md:p-10">
+            <div class="p-8 md:p-10">
                 <h1 class="text-3xl font-black text-center text-white mb-2 tracking-tight">
                     Créer un compte
                 </h1>
@@ -186,45 +186,6 @@
     </footer>
 
     <!-- Script d'Inscription et redirection -->
-    <script>
-        function handleRegister(event) {
-            event.preventDefault();
-            const pass = document.getElementById('regPassword').value;
-            const confirmPass = document.getElementById('regConfirmPassword').value;
-            
-            if (pass !== confirmPass) {
-                alert('Les mots de passe ne correspondent pas.');
-                return;
-            }
-
-            const firstName = document.getElementById('regFirstName').value;
-            const lastName = document.getElementById('regLastName').value;
-            const email = document.getElementById('regEmail').value;
-            const phone = document.getElementById('regPhone').value;
-            const accountType = document.querySelector('input[name="accountType"]:checked').value;
-
-            const btn = document.getElementById('regSubmitBtn');
-            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Création du compte...';
-            btn.disabled = true;
-
-            // Enregistrer dans le localStorage
-            localStorage.setItem('apeartist_user_name', firstName + ' ' + lastName);
-            localStorage.setItem('apeartist_user_email', email);
-            localStorage.setItem('apeartist_user_phone', phone);
-            localStorage.setItem('apeartist_user_role', accountType);
-            localStorage.setItem('apeartist_logged_in', 'true');
-
-            setTimeout(() => {
-                window.location.href = 'dashboard.html';
-            }, 800);
-        }
-
-        function handleSocialRegister(provider) {
-            localStorage.setItem('apeartist_user_name', 'Utilisateur ' + provider);
-            localStorage.setItem('apeartist_user_email', provider.toLowerCase() + '_user@apeartist.tg');
-            localStorage.setItem('apeartist_logged_in', 'true');
-            window.location.href = 'dashboard.html';
-        }
-    </script>
+    <script src="static/js/custom.js"></script>
 </body>
 </html>

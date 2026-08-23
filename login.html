@@ -7,7 +7,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="static/img/favicon.svg">    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="icon" type="image/x-icon" href="static/img/favicon.svg">
+    <link rel="stylesheet" href="static/css/custom.css">
 
 </head>
 <body class="min-h-screen flex flex-col justify-between">
@@ -40,7 +41,7 @@
         <div class="w-full max-w-[540px]">
             
             <!-- Auth Card matching the provided capture -->
-            <div class="auth-card p-8 md:p-10">
+            <div class="p-8 md:p-10">
                 <h1 class="text-3xl font-black text-center text-white mb-2 tracking-tight">
                     Se connecter
                 </h1>
@@ -161,29 +162,6 @@
     </footer>
 
     <!-- Script de Connexion et redirection vers le dashboard -->
-    <script>
-        function handleLogin(event) {
-            event.preventDefault();
-            const email = document.getElementById('loginEmail').value;
-            const btn = document.getElementById('submitBtn');
-            
-            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Connexion...';
-            btn.disabled = true;
-
-            // Enregistrer session simulée
-            localStorage.setItem('apeartist_user_email', email);
-            localStorage.setItem('apeartist_logged_in', 'true');
-
-            setTimeout(() => {
-                window.location.href = 'dashboard.html';
-            }, 800);
-        }
-
-        function handleSocialLogin(provider) {
-            localStorage.setItem('apeartist_user_email', provider.toLowerCase() + '_user@apeartist.tg');
-            localStorage.setItem('apeartist_logged_in', 'true');
-            window.location.href = 'dashboard.html';
-        }
-    </script>
+    <script src="static/js/custom.js"></script>
 </body>
 </html>
