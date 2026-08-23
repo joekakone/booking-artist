@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apé Artist | Créer un compte</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="static/img/favicon.svg">
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+
+    <!-- Nav -->
+    <nav class="sticky top-0 bg-[#121212]/95 backdrop-blur-md z-50 border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 py-4 flex items-center justify-between">
+            <a href="index.html" class="text-2xl font-black tracking-tighter flex items-center">
+                <i class="fa-solid fa-compact-disc mr-2 spotify-green"></i>
+                APÉ<span class="spotify-green">ARTIST</span>
+            </a>
+            <div class="hidden md:flex space-x-8 font-bold text-xs uppercase tracking-widest">
+                <a href="artists.html" class="hover:text-white text-gray-400 transition-colors">Artistes</a>
+                <a href="index.html#how-it-works" class="hover:text-white text-gray-400 transition-colors">Comment ça marche</a>
+                <a href="index.html#faq" class="hover:text-white text-gray-400 transition-colors">Aide</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="login.html" class="text-gray-300 hover:text-white font-bold text-xs uppercase tracking-wider transition-colors px-2">
+                    Connexion
+                </a>
+                <a href="register.html" class="bg-white text-black px-6 py-2.5 rounded-full font-black hover:scale-105 transition-transform text-xs uppercase inline-block">
+                    S'INSCRIRE
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow flex items-center justify-center py-16 px-6 md:px-12 gradient-hero">
+        <div class="w-full max-w-[540px]">
+            
+            <!-- Auth Card -->
+            <div class="auth-card p-8 md:p-10">
+                <h1 class="text-3xl font-black text-center text-white mb-2 tracking-tight">
+                    Créer un compte
+                </h1>
+                <p class="text-center text-gray-400 text-xs font-medium mb-6">
+                    Rejoignez la plus grande communauté musicale du Togo
+                </p>
+
+                <!-- Type de compte selector -->
+                <div class="grid grid-cols-3 gap-3 mb-6 p-1 bg-white/5 rounded-full border border-white/5">
+                    <div>
+                        <input type="radio" name="accountType" id="typeClient" value="Client" class="hidden role-radio" checked>
+                        <label for="typeClient" class="flex items-center justify-center py-2.5 px-2 rounded-full text-xs font-black uppercase tracking-wider cursor-pointer text-gray-300 transition-all text-center">
+                            Client
+                        </label>
+                    </div>
+                    <div>
+                        <input type="radio" name="accountType" id="typeArtiste" value="Artiste" class="hidden role-radio">
+                        <label for="typeArtiste" class="flex items-center justify-center py-2.5 px-2 rounded-full text-xs font-black uppercase tracking-wider cursor-pointer text-gray-300 transition-all text-center">
+                            Artiste
+                        </label>
+                    </div>
+                    <div>
+                        <input type="radio" name="accountType" id="typeManager" value="Manager" class="hidden role-radio">
+                        <label for="typeManager" class="flex items-center justify-center py-2.5 px-2 rounded-full text-xs font-black uppercase tracking-wider cursor-pointer text-gray-300 transition-all text-center">
+                            Manager
+                        </label>
+                    </div>
+                </div>
+
+                <form id="registerForm" class="space-y-4" onsubmit="handleRegister(event)">
+                    
+                    <!-- Prénom & Nom -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <input type="text" id="regFirstName" placeholder="Prénom" class="input-white" required>
+                        </div>
+                        <div>
+                            <input type="text" id="regLastName" placeholder="Nom" class="input-white" required>
+                        </div>
+                    </div>
+
+                    <!-- Email Field -->
+                    <div>
+                        <input type="email" id="regEmail" placeholder="Adresse email" class="input-white" required autocomplete="email">
+                    </div>
+
+                    <!-- Téléphone -->
+                    <div>
+                        <input type="tel" id="regPhone" placeholder="Numéro WhatsApp (ex: +228 90 00 00 00)" class="input-white" required>
+                    </div>
+
+                    <!-- Password Field -->
+                    <div>
+                        <input type="password" id="regPassword" placeholder="Mot de passe (min. 8 caractères)" class="input-white" required minlength="8" autocomplete="new-password">
+                    </div>
+
+                    <!-- Confirm Password Field -->
+                    <div>
+                        <input type="password" id="regConfirmPassword" placeholder="Confirmer le mot de passe" class="input-white" required minlength="8" autocomplete="new-password">
+                    </div>
+
+                    <!-- CGU Checkbox -->
+                    <div class="flex items-start space-x-3 pt-2">
+                        <input type="checkbox" id="acceptCGU" class="mt-1 w-4 h-4 rounded accent-[#1DB954] cursor-pointer bg-white" required>
+                        <label for="acceptCGU" class="text-xs text-gray-400 font-medium leading-relaxed">
+                            J'accepte les 
+                            <a href="cgu.html" class="text-[#1DB954] hover:text-white transition-colors">Conditions Générales d'Utilisation</a> 
+                            et la 
+                            <a href="confidentialite.html" class="text-[#1DB954] hover:text-white transition-colors">Politique de Confidentialité</a>.
+                        </label>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="pt-2">
+                        <button type="submit" id="regSubmitBtn" class="w-full bg-[#1DB954] text-black font-black uppercase tracking-[0.2em] py-4 rounded-lg hover:scale-[1.01] active:scale-95 transition-all btn-glow text-sm">
+                            S'INSCRIRE
+                        </button>
+                    </div>
+
+                    <!-- Separator Text -->
+                    <div class="text-center py-2">
+                        <span class="text-gray-400 text-xs font-medium">ou s'inscrire avec</span>
+                    </div>
+
+                    <!-- Google Social Button -->
+                    <div>
+                        <button type="button" onclick="handleSocialRegister('Google')" class="btn-white flex items-center justify-center space-x-3 text-sm shadow">
+                            <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24">
+                                <path fill="#EA4335" d="M12 5c1.54 0 2.93.57 4.02 1.51l3.01-3.01C17.21 1.79 14.77 1 12 1 7.42 1 3.49 3.59 1.54 7.36l3.66 2.84C6.07 7.37 8.8 5 12 5z"/>
+                                <path fill="#4285F4" d="M23.49 12.27c0-.79-.07-1.54-.19-2.27H12v4.51h6.47c-.29 1.48-1.14 2.73-2.4 3.58l3.71 2.88c2.16-1.99 3.71-4.93 3.71-8.7z"/>
+                                <path fill="#FBBC05" d="M5.2 14.8c-.24-.71-.38-1.47-.38-2.27 0-.8.14-1.56.38-2.27L1.54 7.42C.56 9.38 0 11.59 0 12.93s.56 3.55 1.54 5.51l3.66-2.84z"/>
+                                <path fill="#34A853" d="M12 23c3.24 0 5.95-1.08 7.93-2.91l-3.71-2.88c-1.08.72-2.45 1.16-4.22 1.16-3.2 0-5.93-2.37-6.8-5.2L1.54 16c1.95 3.77 5.88 6.36 10.46 6.36z"/>
+                            </svg>
+                            <span class="font-bold text-gray-800">Google</span>
+                        </button>
+                    </div>
+
+                    <!-- Facebook Social Button -->
+                    <div>
+                        <button type="button" onclick="handleSocialRegister('Facebook')" class="btn-facebook flex items-center justify-center space-x-3 text-sm shadow">
+                            <i class="fa-brands fa-facebook-f text-base"></i>
+                            <span>Facebook</span>
+                        </button>
+                    </div>
+
+                    <!-- Switch to Login Link -->
+                    <div class="text-center pt-5">
+                        <p class="text-gray-400 text-xs font-medium">
+                            Vous avez déjà un compte ? 
+                            <a href="login.html" class="text-[#1DB954] hover:text-white font-bold transition-colors ml-1">
+                                Connectez-vous
+                            </a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black py-12 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8 mb-8">
+                <a href="index.html" class="text-2xl font-black tracking-tighter">
+                    APÉ<span class="spotify-green">ARTIST</span>
+                </a>
+                <div class="flex space-x-8 text-gray-500 font-bold text-xs uppercase tracking-widest">
+                    <a href="confidentialite.html" class="hover:text-white transition-colors">Confidentialité</a>
+                    <a href="cgu.html" class="hover:text-white transition-colors">CGU</a>
+                    <a href="contact.html" class="hover:text-white transition-colors">Contact</a>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-all"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-all"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-all"><i class="fa-brands fa-tiktok"></i></a>
+                </div>
+            </div>
+            <div class="text-center text-[10px] text-gray-600 font-bold uppercase tracking-[0.4em]">
+                © 2026 APÉ ARTIST TOGO. TOUS TALENTS RÉSERVÉS.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script d'Inscription et redirection -->
+    <script>
+        function handleRegister(event) {
+            event.preventDefault();
+            const pass = document.getElementById('regPassword').value;
+            const confirmPass = document.getElementById('regConfirmPassword').value;
+            
+            if (pass !== confirmPass) {
+                alert('Les mots de passe ne correspondent pas.');
+                return;
+            }
+
+            const firstName = document.getElementById('regFirstName').value;
+            const lastName = document.getElementById('regLastName').value;
+            const email = document.getElementById('regEmail').value;
+            const phone = document.getElementById('regPhone').value;
+            const accountType = document.querySelector('input[name="accountType"]:checked').value;
+
+            const btn = document.getElementById('regSubmitBtn');
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Création du compte...';
+            btn.disabled = true;
+
+            // Enregistrer dans le localStorage
+            localStorage.setItem('apeartist_user_name', firstName + ' ' + lastName);
+            localStorage.setItem('apeartist_user_email', email);
+            localStorage.setItem('apeartist_user_phone', phone);
+            localStorage.setItem('apeartist_user_role', accountType);
+            localStorage.setItem('apeartist_logged_in', 'true');
+
+            setTimeout(() => {
+                window.location.href = 'dashboard.html';
+            }, 800);
+        }
+
+        function handleSocialRegister(provider) {
+            localStorage.setItem('apeartist_user_name', 'Utilisateur ' + provider);
+            localStorage.setItem('apeartist_user_email', provider.toLowerCase() + '_user@apeartist.tg');
+            localStorage.setItem('apeartist_logged_in', 'true');
+            window.location.href = 'dashboard.html';
+        }
+    </script>
+</body>
+</html>

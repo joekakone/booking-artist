@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apé Artist | Se connecter</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="static/img/favicon.svg">    <link rel="stylesheet" href="static/css/style.css">
+
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+
+    <!-- Nav -->
+    <nav class="sticky top-0 bg-[#121212]/95 backdrop-blur-md z-50 border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 py-4 flex items-center justify-between">
+            <a href="index.html" class="text-2xl font-black tracking-tighter flex items-center">
+                <i class="fa-solid fa-compact-disc mr-2 spotify-green"></i>
+                APÉ<span class="spotify-green">ARTIST</span>
+            </a>
+            <div class="hidden md:flex space-x-8 font-bold text-xs uppercase tracking-widest">
+                <a href="artists.html" class="hover:text-white text-gray-400 transition-colors">Artistes</a>
+                <a href="index.html#how-it-works" class="hover:text-white text-gray-400 transition-colors">Comment ça marche</a>
+                <a href="index.html#faq" class="hover:text-white text-gray-400 transition-colors">Aide</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="login.html" class="text-gray-300 hover:text-white font-bold text-xs uppercase tracking-wider transition-colors px-2">
+                    Connexion
+                </a>
+                <a href="register.html" class="bg-white text-black px-6 py-2.5 rounded-full font-black hover:scale-105 transition-transform text-xs uppercase inline-block">
+                    S'INSCRIRE
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content (Form Centered) -->
+    <main class="flex-grow flex items-center justify-center py-16 px-6 md:px-12 gradient-hero">
+        <div class="w-full max-w-[540px]">
+            
+            <!-- Auth Card matching the provided capture -->
+            <div class="auth-card p-8 md:p-10">
+                <h1 class="text-3xl font-black text-center text-white mb-2 tracking-tight">
+                    Se connecter
+                </h1>
+                <p class="text-center text-gray-400 text-xs font-medium mb-6">
+                    Connectez-vous pour accéder à votre espace
+                </p>
+
+                <form id="loginForm" class="space-y-4" onsubmit="handleLogin(event)">
+                    <!-- Email Field -->
+                    <div>
+                        <input 
+                            type="email" 
+                            id="loginEmail" 
+                            placeholder="Email" 
+                            class="input-white" 
+                            required 
+                            autocomplete="email"
+                        >
+                    </div>
+
+                    <!-- Password Field -->
+                    <div>
+                        <input 
+                            type="password" 
+                            id="loginPassword" 
+                            placeholder="Mot de passe" 
+                            class="input-white" 
+                            required 
+                            autocomplete="current-password"
+                        >
+                    </div>
+
+                    <!-- Remember Me & Forgot Password -->
+                    <div class="flex items-center justify-between pt-1 pb-2 px-1">
+                        <label class="flex items-center space-x-2.5 cursor-pointer select-none text-sm text-gray-300">
+                            <input 
+                                type="checkbox" 
+                                id="rememberMe" 
+                                class="w-4 h-4 rounded accent-[#1DB954] cursor-pointer bg-white"
+                            >
+                            <span class="font-normal text-sm">Se souvenir de moi</span>
+                        </label>
+                        <a href="#" onclick="alert('Un lien de réinitialisation sera envoyé à votre adresse email.')" class="text-xs text-gray-400 hover:text-white transition-colors">
+                            Mot de passe oublié ?
+                        </a>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="pt-2">
+                        <button type="submit" id="submitBtn" class="w-full bg-[#1DB954] text-black font-black uppercase tracking-[0.2em] py-4 rounded-lg hover:scale-[1.01] active:scale-95 transition-all btn-glow text-sm">
+                            CONNEXION
+                        </button>
+                    </div>
+
+                    <!-- Separator Text -->
+                    <div class="text-center py-2">
+                        <span class="text-gray-400 text-xs font-medium">ou continuez avec</span>
+                    </div>
+
+                    <!-- Google Social Button -->
+                    <div>
+                        <button type="button" onclick="handleSocialLogin('Google')" class="btn-white flex items-center justify-center space-x-3 text-sm shadow">
+                            <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24">
+                                <path fill="#EA4335" d="M12 5c1.54 0 2.93.57 4.02 1.51l3.01-3.01C17.21 1.79 14.77 1 12 1 7.42 1 3.49 3.59 1.54 7.36l3.66 2.84C6.07 7.37 8.8 5 12 5z"/>
+                                <path fill="#4285F4" d="M23.49 12.27c0-.79-.07-1.54-.19-2.27H12v4.51h6.47c-.29 1.48-1.14 2.73-2.4 3.58l3.71 2.88c2.16-1.99 3.71-4.93 3.71-8.7z"/>
+                                <path fill="#FBBC05" d="M5.2 14.8c-.24-.71-.38-1.47-.38-2.27 0-.8.14-1.56.38-2.27L1.54 7.42C.56 9.38 0 11.59 0 12.93s.56 3.55 1.54 5.51l3.66-2.84z"/>
+                                <path fill="#34A853" d="M12 23c3.24 0 5.95-1.08 7.93-2.91l-3.71-2.88c-1.08.72-2.45 1.16-4.22 1.16-3.2 0-5.93-2.37-6.8-5.2L1.54 16c1.95 3.77 5.88 6.36 10.46 6.36z"/>
+                            </svg>
+                            <span class="font-bold text-gray-800">Google</span>
+                        </button>
+                    </div>
+
+                    <!-- Facebook Social Button -->
+                    <div>
+                        <button type="button" onclick="handleSocialLogin('Facebook')" class="btn-facebook flex items-center justify-center space-x-3 text-sm shadow">
+                            <i class="fa-brands fa-facebook-f text-base"></i>
+                            <span>Facebook</span>
+                        </button>
+                    </div>
+
+                    <!-- Switch to Register Link -->
+                    <div class="text-center pt-5">
+                        <p class="text-gray-400 text-xs font-medium">
+                            Vous n'avez pas de compte ? 
+                            <a href="register.html" class="text-[#1DB954] hover:text-white font-bold transition-colors ml-1">
+                                Inscrivez-vous
+                            </a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black py-12 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8 mb-8">
+                <a href="index.html" class="text-2xl font-black tracking-tighter">
+                    APÉ<span class="spotify-green">ARTIST</span>
+                </a>
+                <div class="flex space-x-8 text-gray-500 font-bold text-xs uppercase tracking-widest">
+                    <a href="confidentialite.html" class="hover:text-white transition-colors">Confidentialité</a>
+                    <a href="cgu.html" class="hover:text-white transition-colors">CGU</a>
+                    <a href="contact.html" class="hover:text-white transition-colors">Contact</a>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-all"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-all"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-all"><i class="fa-brands fa-tiktok"></i></a>
+                </div>
+            </div>
+            <div class="text-center text-[10px] text-gray-600 font-bold uppercase tracking-[0.4em]">
+                © 2026 APÉ ARTIST TOGO. TOUS TALENTS RÉSERVÉS.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script de Connexion et redirection vers le dashboard -->
+    <script>
+        function handleLogin(event) {
+            event.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const btn = document.getElementById('submitBtn');
+            
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Connexion...';
+            btn.disabled = true;
+
+            // Enregistrer session simulée
+            localStorage.setItem('apeartist_user_email', email);
+            localStorage.setItem('apeartist_logged_in', 'true');
+
+            setTimeout(() => {
+                window.location.href = 'dashboard.html';
+            }, 800);
+        }
+
+        function handleSocialLogin(provider) {
+            localStorage.setItem('apeartist_user_email', provider.toLowerCase() + '_user@apeartist.tg');
+            localStorage.setItem('apeartist_logged_in', 'true');
+            window.location.href = 'dashboard.html';
+        }
+    </script>
+</body>
+</html>

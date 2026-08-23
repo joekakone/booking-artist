@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apé Artist | Mon Espace Personnel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="static/img/favicon.svg">
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed top-20 right-6 z-50 bg-[#1DB954] text-black font-bold px-6 py-4 rounded-2xl shadow-2xl flex items-center space-x-3 border border-white/20">
+        <i class="fa-solid fa-circle-check text-xl"></i>
+        <span id="toastMessage">Informations enregistrées avec succès !</span>
+    </div>
+
+    <!-- Nav -->
+    <nav class="sticky top-0 bg-[#121212]/95 backdrop-blur-md z-50 border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 py-4 flex items-center justify-between">
+            <a href="index.html" class="text-2xl font-black tracking-tighter flex items-center">
+                <i class="fa-solid fa-compact-disc mr-2 spotify-green"></i>
+                APÉ<span class="spotify-green">ARTIST</span>
+            </a>
+            
+            <div class="hidden md:flex space-x-8 font-bold text-xs uppercase tracking-widest">
+                <a href="artists.html" class="hover:text-white text-gray-400 transition-colors">Artistes</a>
+                <a href="index.html#how-it-works" class="hover:text-white text-gray-400 transition-colors">Comment ça marche</a>
+                <a href="index.html#faq" class="hover:text-white text-gray-400 transition-colors">Aide</a>
+            </div>
+
+            <!-- User Status & Profile in Navbar -->
+            <div class="flex items-center space-x-4">
+                <div class="flex items-center space-x-3 bg-white/5 border border-white/10 px-4 py-2 rounded-full">
+                    <img id="navAvatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="Avatar" class="w-7 h-7 rounded-full object-cover border border-[#1DB954]">
+                    <span id="navUserName" class="text-xs font-bold hidden sm:inline-block">Koffi Mensah</span>
+                </div>
+                <button onclick="logoutUser()" title="Se déconnecter" class="text-gray-400 hover:text-red-400 text-sm p-2 transition-colors">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow pb-24">
+        
+        <!-- Dashboard Hero / Welcome Banner -->
+        <header class="gradient-hero pt-12 pb-16 px-6 md:px-12 border-b border-white/5">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-8">
+                    
+                    <!-- User Info Intro -->
+                    <div class="flex items-center space-x-6">
+                        <div class="relative group">
+                            <img id="headerAvatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80" alt="Profile" class="w-24 h-24 md:w-28 md:h-28 rounded-full object-cover border-4 border-[#1DB954] shadow-2xl">
+                            <button onclick="switchTab('tabSettings')" class="absolute inset-0 bg-black/60 rounded-full opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center text-xs font-bold text-white transition-all">
+                                <i class="fa-solid fa-camera mb-1 text-base"></i> Modifier
+                            </button>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-3 mb-1">
+                                <h1 id="headerGreeting" class="text-2xl md:text-4xl font-black tracking-tight">Koffi Mensah</h1>
+                                <span class="bg-[#1DB954]/10 text-[#1DB954] border border-[#1DB954]/30 px-3 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider">Vérifié</span>
+                            </div>
+                            <p class="text-gray-400 text-sm font-medium flex items-center gap-4 flex-wrap">
+                                <span><i class="fa-solid fa-user-tag mr-1.5 text-gray-500"></i><span id="headerRole">Organisateur d'Événements</span></span>
+                                <span><i class="fa-solid fa-location-dot mr-1.5 text-gray-500"></i><span id="headerCity">Lomé, Togo</span></span>
+                                <span><i class="fa-solid fa-calendar mr-1.5 text-gray-500"></i>Membre depuis Mars 2025</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="flex flex-wrap gap-3">
+                        <a href="artists.html" class="bg-[#1DB954] text-black font-black px-6 py-3.5 rounded-full text-xs uppercase tracking-wider hover:scale-105 transition-all shadow-lg flex items-center">
+                            <i class="fa-solid fa-magnifying-glass mr-2"></i> Réserver un artiste
+                        </a>
+                        <button onclick="switchTab('tabSettings')" class="bg-white/10 hover:bg-white/20 border border-white/10 text-white font-bold px-6 py-3.5 rounded-full text-xs uppercase tracking-wider transition-all flex items-center">
+                            <i class="fa-solid fa-sliders mr-2"></i> Paramètres
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </header>
+
+        <!-- KPI / Stats Section -->
+        <section class="max-w-7xl mx-auto px-6 md:px-12 -mt-8">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+                
+                <!-- Stat Card 1 -->
+                <div class="bg-spotify-card p-6 rounded-2xl">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-gray-400 text-xs font-bold uppercase tracking-wider">Réservations</span>
+                        <div class="w-10 h-10 rounded-full bg-[#1DB954]/10 text-[#1DB954] flex items-center justify-center">
+                            <i class="fa-solid fa-calendar-check"></i>
+                        </div>
+                    </div>
+                    <p class="text-3xl font-black">3 <span class="text-sm font-semibold text-gray-400">actives</span></p>
+                    <p class="text-xs text-gray-500 mt-2"><i class="fa-solid fa-arrow-trend-up text-[#1DB954] mr-1"></i> +1 cette semaine</p>
+                </div>
+
+                <!-- Stat Card 2 -->
+                <div class="bg-spotify-card p-6 rounded-2xl">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-gray-400 text-xs font-bold uppercase tracking-wider">Artistes Favoris</span>
+                        <div class="w-10 h-10 rounded-full bg-pink-500/10 text-pink-500 flex items-center justify-center">
+                            <i class="fa-solid fa-heart"></i>
+                        </div>
+                    </div>
+                    <p class="text-3xl font-black">8 <span class="text-sm font-semibold text-gray-400">artistes</span></p>
+                    <p class="text-xs text-gray-500 mt-2">Afrobeat, Gospel, DJ</p>
+                </div>
+
+                <!-- Stat Card 3 -->
+                <div class="bg-spotify-card p-6 rounded-2xl">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-gray-400 text-xs font-bold uppercase tracking-wider">Budget Engagé</span>
+                        <div class="w-10 h-10 rounded-full bg-blue-500/10 text-blue-400 flex items-center justify-center">
+                            <i class="fa-solid fa-wallet"></i>
+                        </div>
+                    </div>
+                    <p class="text-2xl md:text-3xl font-black">450.000 <span class="text-xs font-bold text-gray-400">FCFA</span></p>
+                    <p class="text-xs text-gray-500 mt-2">3 prestations réservées</p>
+                </div>
+
+                <!-- Stat Card 4 -->
+                <div class="bg-spotify-card p-6 rounded-2xl">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-gray-400 text-xs font-bold uppercase tracking-wider">Prochain Événement</span>
+                        <div class="w-10 h-10 rounded-full bg-purple-500/10 text-purple-400 flex items-center justify-center">
+                            <i class="fa-solid fa-clock"></i>
+                        </div>
+                    </div>
+                    <p class="text-xl md:text-2xl font-black">28 Août</p>
+                    <p class="text-xs text-[#1DB954] mt-2 font-bold">Kiko Live Showcase</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Navigation Tabs -->
+        <section class="max-w-7xl mx-auto px-6 md:px-12 mt-12">
+            <div class="flex items-center space-x-2 border-b border-white/10 pb-4 overflow-x-auto">
+                <button onclick="switchTab('tabOverview')" id="btnTabOverview" class="tab-btn active px-6 py-2.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all shrink-0">
+                    <i class="fa-solid fa-chart-pie mr-2"></i> Vue d'ensemble
+                </button>
+                <button onclick="switchTab('tabBookings')" id="btnTabBookings" class="tab-btn bg-white/5 text-gray-400 hover:text-white px-6 py-2.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all shrink-0">
+                    <i class="fa-solid fa-list-check mr-2"></i> Mes Réservations (3)
+                </button>
+                <button onclick="switchTab('tabFavorites')" id="btnTabFavorites" class="tab-btn bg-white/5 text-gray-400 hover:text-white px-6 py-2.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all shrink-0">
+                    <i class="fa-solid fa-heart mr-2"></i> Favoris (8)
+                </button>
+                <button onclick="switchTab('tabSettings')" id="btnTabSettings" class="tab-btn bg-white/5 text-gray-400 hover:text-white px-6 py-2.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all shrink-0">
+                    <i class="fa-solid fa-gear mr-2"></i> Paramètres & Profil
+                </button>
+            </div>
+        </section>
+
+        <!-- TAB 1: VUE D'ENSEMBLE -->
+        <section id="tabOverview" class="tab-content max-w-7xl mx-auto px-6 md:px-12 mt-8 space-y-12">
+            
+            <!-- Prochaines prestations -->
+            <div>
+                <div class="flex justify-between items-center mb-6">
+                    <div>
+                        <h2 class="text-2xl font-black tracking-tight">Prochaines Prestations</h2>
+                        <p class="text-gray-400 text-xs font-medium">Vos artistes confirmés et en attente</p>
+                    </div>
+                    <button onclick="switchTab('tabBookings')" class="text-xs font-bold text-[#1DB954] hover:underline uppercase tracking-wider">
+                        Voir tout l'historique
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <!-- Prestation 1 -->
+                    <div class="bg-spotify-card p-6 rounded-2xl flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-start justify-between mb-4">
+                                <div class="flex items-center space-x-4">
+                                    <img src="https://cdn-images.dzcdn.net/images/artist/9684760aba0fc6d62cc1f56939b9abab/1900x1900-000000-80-0-0.jpg" class="w-14 h-14 rounded-xl object-cover" alt="Kiko">
+                                    <div>
+                                        <h3 class="font-bold text-lg">Kiko</h3>
+                                        <p class="text-xs text-gray-400">Showcase Live Privé</p>
+                                    </div>
+                                </div>
+                                <span class="bg-[#1DB954]/20 text-[#1DB954] text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider">
+                                    Confirmé
+                                </span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3 py-4 border-y border-white/5 text-xs text-gray-300">
+                                <div>
+                                    <p class="text-gray-500 text-[10px] uppercase font-bold tracking-wider">Date & Heure</p>
+                                    <p class="font-semibold mt-0.5"><i class="fa-regular fa-clock mr-1 text-[#1DB954]"></i> 28 Août 2026 • 21:00</p>
+                                </div>
+                                <div>
+                                    <p class="text-gray-500 text-[10px] uppercase font-bold tracking-wider">Lieu</p>
+                                    <p class="font-semibold mt-0.5"><i class="fa-solid fa-location-dot mr-1 text-[#1DB954]"></i> Salle Ovale, Lomé</p>
+                                </div>
+                                <div>
+                                    <p class="text-gray-500 text-[10px] uppercase font-bold tracking-wider">Cachet convenu</p>
+                                    <p class="font-bold text-white mt-0.5">250.000 FCFA</p>
+                                </div>
+                                <div>
+                                    <p class="text-gray-500 text-[10px] uppercase font-bold tracking-wider">Acompte versé</p>
+                                    <p class="font-bold text-[#1DB954] mt-0.5">100.000 FCFA (40%)</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 mt-6">
+                            <a href="https://wa.me/22891518923" target="_blank" class="flex-1 bg-[#1DB954] text-black font-bold py-2.5 rounded-full text-xs text-center uppercase tracking-wider hover:scale-[1.02] transition-all">
+                                <i class="fa-brands fa-whatsapp mr-1.5"></i> Contacter l'artiste
+                            </a>
+                            <a href="profile.html" class="bg-white/10 hover:bg-white/20 text-white font-bold py-2.5 px-4 rounded-full text-xs text-center uppercase tracking-wider transition-all">
+                                Profil
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Prestation 2 -->
+                    <div class="bg-spotify-card p-6 rounded-2xl flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-start justify-between mb-4">
+                                <div class="flex items-center space-x-4">
+                                    <img src="https://images.unsplash.com/photo-1520110120835-c96534a4c984?auto=format&fit=crop&w=300&q=80" class="w-14 h-14 rounded-xl object-cover" alt="Guitariste">
+                                    <div>
+                                        <h3 class="font-bold text-lg">Délali & Guitare</h3>
+                                        <p class="text-xs text-gray-400">Ambiance Cocktail Acoustique</p>
+                                    </div>
+                                </div>
+                                <span class="bg-yellow-500/20 text-yellow-400 text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider">
+                                    En attente d'acompte
+                                </span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3 py-4 border-y border-white/5 text-xs text-gray-300">
+                                <div>
+                                    <p class="text-gray-500 text-[10px] uppercase font-bold tracking-wider">Date & Heure</p>
+                                    <p class="font-semibold mt-0.5"><i class="fa-regular fa-clock mr-1 text-yellow-400"></i> 12 Sept 2026 • 19:00</p>
+                                </div>
+                                <div>
+                                    <p class="text-gray-500 text-[10px] uppercase font-bold tracking-wider">Lieu</p>
+                                    <p class="font-semibold mt-0.5"><i class="fa-solid fa-location-dot mr-1 text-yellow-400"></i> Hôtel 2 Février, Lomé</p>
+                                </div>
+                                <div>
+                                    <p class="text-gray-500 text-[10px] uppercase font-bold tracking-wider">Cachet convenu</p>
+                                    <p class="font-bold text-white mt-0.5">120.000 FCFA</p>
+                                </div>
+                                <div>
+                                    <p class="text-gray-500 text-[10px] uppercase font-bold tracking-wider">Date limite validation</p>
+                                    <p class="font-bold text-yellow-400 mt-0.5">Dans 48 heures</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 mt-6">
+                            <a href="contact.html" class="flex-1 bg-white text-black font-bold py-2.5 rounded-full text-xs text-center uppercase tracking-wider hover:scale-[1.02] transition-all">
+                                Finaliser le paiement
+                            </a>
+                            <a href="artists.html" class="bg-white/10 hover:bg-white/20 text-white font-bold py-2.5 px-4 rounded-full text-xs text-center uppercase tracking-wider transition-all">
+                                Détails
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Recommandations personnalisées -->
+            <div>
+                <div class="flex justify-between items-center mb-6">
+                    <div>
+                        <h2 class="text-2xl font-black tracking-tight">Recommandé pour vous</h2>
+                        <p class="text-gray-400 text-xs font-medium">Selon vos préférences Afrobeat & Acoustique</p>
+                    </div>
+                    <a href="artists.html" class="text-xs font-bold text-[#1DB954] hover:underline uppercase tracking-wider">
+                        Explorer le catalogue
+                    </a>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <!-- Artiste 1 -->
+                    <a href="profile.html" class="bg-spotify-card p-4 rounded-2xl cursor-pointer group block">
+                        <div class="relative mb-4 overflow-hidden rounded-xl">
+                            <img src="https://cdn-images.dzcdn.net/images/artist/9684760aba0fc6d62cc1f56939b9abab/1900x1900-000000-80-0-0.jpg" class="aspect-square object-cover group-hover:scale-110 transition-transform duration-500" alt="Kiko">
+                            <div class="absolute bottom-3 right-3 bg-spotify-green w-10 h-10 rounded-full flex items-center justify-center shadow-lg opacity-0 group-hover:opacity-100 transition-all translate-y-4 group-hover:translate-y-0">
+                                <i class="fa-solid fa-calendar-check text-black"></i>
+                            </div>
+                        </div>
+                        <h3 class="font-bold truncate">Kiko</h3>
+                        <p class="text-gray-500 text-xs font-bold tracking-wider mt-1">Afrobeat & RnB</p>
+                    </a>
+
+                    <!-- Artiste 2 -->
+                    <a href="profile.html" class="bg-spotify-card p-4 rounded-2xl cursor-pointer group block">
+                        <div class="relative mb-4 overflow-hidden rounded-xl">
+                            <img src="https://images.unsplash.com/photo-1571330735066-03aaa9429d89?auto=format&fit=crop&w=400&q=80" class="aspect-square object-cover group-hover:scale-110 transition-transform duration-500" alt="DJ">
+                            <div class="absolute bottom-3 right-3 bg-spotify-green w-10 h-10 rounded-full flex items-center justify-center shadow-lg opacity-0 group-hover:opacity-100 transition-all translate-y-4 group-hover:translate-y-0">
+                                <i class="fa-solid fa-calendar-check text-black"></i>
+                            </div>
+                        </div>
+                        <h3 class="font-bold truncate">DJ Flash Lomé</h3>
+                        <p class="text-gray-500 text-[10px] font-black tracking-widest mt-1">Électro / Mix</p>
+                    </a>
+
+                    <!-- Artiste 3 -->
+                    <a href="profile.html" class="bg-spotify-card p-4 rounded-2xl cursor-pointer group block">
+                        <div class="relative mb-4 overflow-hidden rounded-xl">
+                            <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=400&q=80" class="aspect-square object-cover group-hover:scale-110 transition-transform duration-500" alt="Orchestre">
+                            <div class="absolute bottom-3 right-3 bg-spotify-green w-10 h-10 rounded-full flex items-center justify-center shadow-lg opacity-0 group-hover:opacity-100 transition-all translate-y-4 group-hover:translate-y-0">
+                                <i class="fa-solid fa-calendar-check text-black"></i>
+                            </div>
+                        </div>
+                        <h3 class="font-bold truncate">The Melodies</h3>
+                        <p class="text-gray-500 text-[10px] font-black tracking-widest mt-1">Orchestre Live</p>
+                    </a>
+
+                    <!-- Artiste 4 -->
+                    <a href="profile.html" class="bg-spotify-card p-4 rounded-2xl cursor-pointer group block">
+                        <div class="relative mb-4 overflow-hidden rounded-xl">
+                            <img src="https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?auto=format&fit=crop&w=400&q=8" class="aspect-square object-cover group-hover:scale-110 transition-transform duration-500" alt="Band">
+                            <div class="absolute bottom-3 right-3 bg-spotify-green w-10 h-10 rounded-full flex items-center justify-center shadow-lg opacity-0 group-hover:opacity-100 transition-all translate-y-4 group-hover:translate-y-0">
+                                <i class="fa-solid fa-calendar-check text-black"></i>
+                            </div>
+                        </div>
+                        <h3 class="font-bold truncate">Afro-Beats Collective</h3>
+                        <p class="text-gray-500 text-[10px] font-black tracking-widest mt-1">Afrobeat</p>
+                    </a>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- TAB 2: MES RÉSERVATIONS -->
+        <section id="tabBookings" class="tab-content hidden max-w-7xl mx-auto px-6 md:px-12 mt-8 space-y-8">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-2xl font-black tracking-tight">Historique des Réservations</h2>
+                    <p class="text-gray-400 text-xs font-medium">Consultez vos contrats, dates et factures</p>
+                </div>
+                <a href="artists.html" class="bg-[#1DB954] text-black font-bold px-6 py-2.5 rounded-full text-xs uppercase tracking-wider inline-flex items-center self-start">
+                    + Nouvelle réservation
+                </a>
+            </div>
+
+            <!-- Table of bookings -->
+            <div class="bg-spotify-card rounded-2xl overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs">
+                        <thead class="bg-white/5 text-gray-400 uppercase tracking-widest font-black text-[10px] border-b border-white/5">
+                            <tr>
+                                <th class="py-4 px-6">Artiste / Prestation</th>
+                                <th class="py-4 px-6">Date de l'événement</th>
+                                <th class="py-4 px-6">Lieu</th>
+                                <th class="py-4 px-6">Montant</th>
+                                <th class="py-4 px-6">Statut</th>
+                                <th class="py-4 px-6 text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-white/5 font-medium text-gray-300">
+                            <!-- Row 1 -->
+                            <tr class="hover:bg-white/5 transition-colors">
+                                <td class="py-4 px-6 flex items-center space-x-3">
+                                    <img src="https://cdn-images.dzcdn.net/images/artist/9684760aba0fc6d62cc1f56939b9abab/1900x1900-000000-80-0-0.jpg" class="w-10 h-10 rounded-lg object-cover" alt="Kiko">
+                                    <div>
+                                        <p class="font-bold text-white text-sm">Kiko</p>
+                                        <p class="text-gray-500 text-[10px]">Showcase Live (2h)</p>
+                                    </div>
+                                </td>
+                                <td class="py-4 px-6">28 Août 2026<br><span class="text-gray-500">21:00</span></td>
+                                <td class="py-4 px-6">Salle Ovale, Lomé</td>
+                                <td class="py-4 px-6 font-bold text-white">250.000 FCFA</td>
+                                <td class="py-4 px-6"><span class="bg-[#1DB954]/20 text-[#1DB954] text-[10px] font-black px-2.5 py-1 rounded-full uppercase">Confirmé</span></td>
+                                <td class="py-4 px-6 text-right">
+                                    <a href="https://wa.me/22891518923" target="_blank" class="bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded-full text-[11px] font-bold inline-block">WhatsApp</a>
+                                </td>
+                            </tr>
+                            <!-- Row 2 -->
+                            <tr class="hover:bg-white/5 transition-colors">
+                                <td class="py-4 px-6 flex items-center space-x-3">
+                                    <img src="https://images.unsplash.com/photo-1520110120835-c96534a4c984?auto=format&fit=crop&w=300&q=80" class="w-10 h-10 rounded-lg object-cover" alt="Délali">
+                                    <div>
+                                        <p class="font-bold text-white text-sm">Délali & Guitare</p>
+                                        <p class="text-gray-500 text-[10px]">Cocktail acoustique</p>
+                                    </div>
+                                </td>
+                                <td class="py-4 px-6">12 Sept 2026<br><span class="text-gray-500">19:00</span></td>
+                                <td class="py-4 px-6">Hôtel 2 Février</td>
+                                <td class="py-4 px-6 font-bold text-white">120.000 FCFA</td>
+                                <td class="py-4 px-6"><span class="bg-yellow-500/20 text-yellow-400 text-[10px] font-black px-2.5 py-1 rounded-full uppercase">En attente</span></td>
+                                <td class="py-4 px-6 text-right">
+                                    <a href="contact.html" class="bg-[#1DB954] text-black px-3 py-1.5 rounded-full text-[11px] font-bold inline-block">Valider</a>
+                                </td>
+                            </tr>
+                            <!-- Row 3 -->
+                            <tr class="hover:bg-white/5 transition-colors">
+                                <td class="py-4 px-6 flex items-center space-x-3">
+                                    <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=300&q=80" class="w-10 h-10 rounded-lg object-cover" alt="DJ Mike">
+                                    <div>
+                                        <p class="font-bold text-white text-sm">DJ Mike Lomé</p>
+                                        <p class="text-gray-500 text-[10px]">Soirée d'anniversaire</p>
+                                    </div>
+                                </td>
+                                <td class="py-4 px-6">14 Juillet 2026<br><span class="text-gray-500">22:00</span></td>
+                                <td class="py-4 px-6">Villa Privée, Baguida</td>
+                                <td class="py-4 px-6 font-bold text-white">80.000 FCFA</td>
+                                <td class="py-4 px-6"><span class="bg-blue-500/20 text-blue-400 text-[10px] font-black px-2.5 py-1 rounded-full uppercase">Terminé</span></td>
+                                <td class="py-4 px-6 text-right">
+                                    <button onclick="alert('Reçu n°AP-2026-088 téléchargé avec succès.')" class="bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded-full text-[11px] font-bold inline-block"><i class="fa-solid fa-download mr-1"></i> Reçu</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: FAVORIS -->
+        <section id="tabFavorites" class="tab-content hidden max-w-7xl mx-auto px-6 md:px-12 mt-8 space-y-8">
+            <div>
+                <h2 class="text-2xl font-black tracking-tight">Vos Artistes Favoris</h2>
+                <p class="text-gray-400 text-xs font-medium">Accédez rapidement à leurs profils et réservez-les</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <!-- Fav 1 -->
+                <a href="profile.html" class="bg-spotify-card p-4 rounded-2xl cursor-pointer group block">
+                    <div class="relative mb-4 overflow-hidden rounded-xl">
+                        <img src="https://cdn-images.dzcdn.net/images/artist/9684760aba0fc6d62cc1f56939b9abab/1900x1900-000000-80-0-0.jpg" class="aspect-square object-cover group-hover:scale-110 transition-transform duration-500" alt="Kiko">
+                        <div class="absolute bottom-3 right-3 bg-spotify-green w-10 h-10 rounded-full flex items-center justify-center shadow-lg opacity-0 group-hover:opacity-100 transition-all translate-y-4 group-hover:translate-y-0">
+                            <i class="fa-solid fa-calendar-check text-black"></i>
+                        </div>
+                    </div>
+                    <h3 class="font-bold truncate">Kiko</h3>
+                    <p class="text-gray-500 text-[10px] font-black tracking-widest mt-1">Afrobeat & RnB</p>
+                </a>
+
+                <!-- Fav 2 -->
+                <a href="profile.html" class="bg-spotify-card p-4 rounded-2xl cursor-pointer group block">
+                    <div class="relative mb-4 overflow-hidden rounded-xl">
+                        <img src="https://images.unsplash.com/photo-1520110120835-c96534a4c984?auto=format&fit=crop&w=400&q=80" class="aspect-square object-cover group-hover:scale-110 transition-transform duration-500" alt="Guitare">
+                        <div class="absolute bottom-3 right-3 bg-spotify-green w-10 h-10 rounded-full flex items-center justify-center shadow-lg opacity-0 group-hover:opacity-100 transition-all translate-y-4 group-hover:translate-y-0">
+                            <i class="fa-solid fa-calendar-check text-black"></i>
+                        </div>
+                    </div>
+                    <h3 class="font-bold truncate">Koffi Solo</h3>
+                    <p class="text-gray-500 text-[10px] font-black tracking-widest mt-1">Acoustique</p>
+                </a>
+
+                <!-- Fav 3 -->
+                <a href="profile.html" class="bg-spotify-card p-4 rounded-2xl cursor-pointer group block">
+                    <div class="relative mb-4 overflow-hidden rounded-xl">
+                        <img src="https://images.unsplash.com/photo-1571330735066-03aaa9429d89?auto=format&fit=crop&w=400&q=80" class="aspect-square object-cover group-hover:scale-110 transition-transform duration-500" alt="DJ">
+                        <div class="absolute bottom-3 right-3 bg-spotify-green w-10 h-10 rounded-full flex items-center justify-center shadow-lg opacity-0 group-hover:opacity-100 transition-all translate-y-4 group-hover:translate-y-0">
+                            <i class="fa-solid fa-calendar-check text-black"></i>
+                        </div>
+                    </div>
+                    <h3 class="font-bold truncate">DJ Flash Lomé</h3>
+                    <p class="text-gray-500 text-[10px] font-black tracking-widest mt-1">Électro / Mix</p>
+                </a>
+
+                <!-- Fav 4 -->
+
+                <a href="profile.html" class="bg-spotify-card p-4 rounded-2xl cursor-pointer group block">
+                    <div class="relative mb-4 overflow-hidden rounded-xl">
+                        <img src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=400&q=80" class="aspect-square object-cover group-hover:scale-110 transition-transform duration-500" alt="Event">
+                        <div class="absolute bottom-3 right-3 bg-spotify-green w-10 h-10 rounded-full flex items-center justify-center shadow-lg opacity-0 group-hover:opacity-100 transition-all translate-y-4 group-hover:translate-y-0">
+                            <i class="fa-solid fa-calendar-check text-black"></i>
+                        </div>
+                    </div>
+                    <h3 class="font-bold truncate">Ewe Heritage</h3>
+                    <p class="text-gray-500 text-[10px] font-black tracking-widest mt-1">Traditionnel</p>
+                </a>
+            </div>
+        </section>
+
+        <!-- TAB 4: PARAMÈTRES & MISE À JOUR DES INFORMATIONS (EXPLICITLY REQUESTED) -->
+        <section id="tabSettings" class="tab-content hidden max-w-4xl mx-auto px-6 md:px-12 mt-8 space-y-10">
+            
+            <div>
+                <h2 class="text-2xl md:text-3xl font-black tracking-tight">Paramètres du Compte</h2>
+                <p class="text-gray-400 text-sm font-medium">Mettez à jour vos informations personnelles, préférences et sécurité</p>
+            </div>
+
+            <!-- Formulaire Principal de mise à jour -->
+            <form id="settingsForm" onsubmit="saveUserSettings(event)" class="space-y-8">
+                
+                <!-- Section 1 : Informations Personnelles -->
+                <div class="bg-spotify-card p-6 md:p-8 rounded-2xl space-y-6">
+                    <h3 class="text-sm font-black uppercase tracking-widest text-[#1DB954] flex items-center">
+                        <i class="fa-solid fa-user mr-2"></i> Informations Personnelles
+                    </h3>
+
+                    <!-- Avatar Change -->
+                    <div class="flex items-center space-x-6 pb-4 border-b border-white/5">
+                        <img id="formAvatarPreview" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80" class="w-16 h-16 rounded-full object-cover border-2 border-[#1DB954]" alt="Avatar">
+                        <div>
+                            <p class="text-xs font-bold mb-1">Photo de profil</p>
+                            <div class="flex gap-2">
+                                <button type="button" onclick="changeAvatarDemo()" class="bg-white text-black px-4 py-2 rounded-full text-xs font-black uppercase hover:scale-105 transition-all">
+                                    Changer de photo
+                                </button>
+                                <button type="button" onclick="resetAvatar()" class="bg-white/10 hover:bg-white/20 text-gray-400 hover:text-white px-4 py-2 rounded-full text-xs font-bold transition-all">
+                                    Réinitialiser
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Prénom & Nom -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-400 mb-1.5 uppercase tracking-wider">Prénom</label>
+                            <input type="text" id="settingFirstName" value="Koffi" class="input-form" required>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-400 mb-1.5 uppercase tracking-wider">Nom</label>
+                            <input type="text" id="settingLastName" value="Mensah" class="input-form" required>
+                        </div>
+                    </div>
+
+                    <!-- Email & Téléphone -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-400 mb-1.5 uppercase tracking-wider">Adresse Email</label>
+                            <input type="email" id="settingEmail" value="koffi.mensah@gmail.com" class="input-form" required>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-400 mb-1.5 uppercase tracking-wider">Numéro WhatsApp</label>
+                            <input type="tel" id="settingPhone" value="+228 90 12 34 56" class="input-form" required>
+                        </div>
+                    </div>
+
+                    <!-- Rôle & Ville -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-400 mb-1.5 uppercase tracking-wider">Type de compte</label>
+                            <select id="settingRole" class="input-form cursor-pointer">
+                                <option value="Organisateur d'Événements" selected>Organisateur d'Événements</option>
+                                <option value="Particulier / Fan">Particulier / Fan</option>
+                                <option value="Établissement (Hôtel / Club / Bar)">Établissement (Hôtel / Club / Bar)</option>
+                                <option value="Artiste / Manager">Artiste / Manager</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-400 mb-1.5 uppercase tracking-wider">Ville / Quartier</label>
+                            <input type="text" id="settingCity" value="Lomé - Hedzranawoe" class="input-form">
+                        </div>
+                    </div>
+
+                    <!-- Bio / Besoins -->
+                    <div>
+                        <label class="block text-xs font-bold text-gray-400 mb-1.5 uppercase tracking-wider">Présentation / Besoins réguliers</label>
+                        <textarea id="settingBio" rows="3" class="input-textarea" placeholder="Décrivez vos événements habituels (mariages, concerts, soirées privées...)">Organisation de mariages, réceptions privées et soirées culturelles à Lomé.</textarea>
+                    </div>
+                </div>
+
+                <!-- Section 2 : Préférences Musicales -->
+                <div class="bg-spotify-card p-6 md:p-8 rounded-2xl space-y-6">
+                    <h3 class="text-sm font-black uppercase tracking-widest text-[#1DB954] flex items-center">
+                        <i class="fa-solid fa-music mr-2"></i> Préférences Musicales & Événements
+                    </h3>
+
+                    <p class="text-xs text-gray-400">Sélectionnez vos genres favoris pour recevoir des recommandations adaptées :</p>
+                    
+                    <div class="flex flex-wrap gap-3" id="genreContainer">
+                        <span class="tag-badge selected border border-white/10 px-4 py-2 rounded-full text-xs" onclick="toggleTag(this)">Afrobeat</span>
+                        <span class="tag-badge selected border border-white/10 px-4 py-2 rounded-full text-xs" onclick="toggleTag(this)">Acoustique & Soul</span>
+                        <span class="tag-badge border border-white/10 px-4 py-2 rounded-full text-xs" onclick="toggleTag(this)">Gospel</span>
+                        <span class="tag-badge selected border border-white/10 px-4 py-2 rounded-full text-xs" onclick="toggleTag(this)">DJ & Amapiano</span>
+                        <span class="tag-badge border border-white/10 px-4 py-2 rounded-full text-xs" onclick="toggleTag(this)">Traditional & Folk</span>
+                        <span class="tag-badge border border-white/10 px-4 py-2 rounded-full text-xs" onclick="toggleTag(this)">Highlife</span>
+                        <span class="tag-badge border border-white/10 px-4 py-2 rounded-full text-xs" onclick="toggleTag(this)">Jazz & Blues</span>
+                        <span class="tag-badge border border-white/10 px-4 py-2 rounded-full text-xs" onclick="toggleTag(this)">Orchestre Live</span>
+                    </div>
+                </div>
+
+                <!-- Section 3 : Sécurité & Notifications -->
+                <div class="bg-spotify-card p-6 md:p-8 rounded-2xl space-y-6">
+                    <h3 class="text-sm font-black uppercase tracking-widest text-[#1DB954] flex items-center">
+                        <i class="fa-solid fa-shield-halved mr-2"></i> Sécurité & Notifications
+                    </h3>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-400 mb-1.5 uppercase tracking-wider">Nouveau mot de passe</label>
+                            <input type="password" id="settingNewPass" placeholder="Laisser vide pour ne pas changer" class="input-form">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-400 mb-1.5 uppercase tracking-wider">Confirmer mot de passe</label>
+                            <input type="password" id="settingConfirmPass" placeholder="Confirmer nouveau mot de passe" class="input-form">
+                        </div>
+                    </div>
+
+                    <div class="space-y-3 pt-2">
+                        <label class="flex items-center space-x-3 cursor-pointer text-xs text-gray-300">
+                            <input type="checkbox" checked class="w-4 h-4 rounded accent-[#1DB954]">
+                            <span>Recevoir les confirmations de booking par WhatsApp</span>
+                        </label>
+                        <label class="flex items-center space-x-3 cursor-pointer text-xs text-gray-300">
+                            <input type="checkbox" checked class="w-4 h-4 rounded accent-[#1DB954]">
+                            <span>Recevoir les factures et reçus par Email</span>
+                        </label>
+                        <label class="flex items-center space-x-3 cursor-pointer text-xs text-gray-300">
+                            <input type="checkbox" checked class="w-4 h-4 rounded accent-[#1DB954]">
+                            <span>Être informé des nouveaux artistes disponibles à Lomé</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Save Button -->
+                <div class="flex justify-end gap-4 pt-4">
+                    <button type="submit" id="saveSettingsBtn" class="bg-[#1DB954] text-black font-black px-10 py-4 rounded-full text-xs uppercase tracking-wider hover:scale-105 active:scale-95 transition-all shadow-xl flex items-center">
+                        <i class="fa-solid fa-floppy-disk mr-2"></i> Enregistrer les modifications
+                    </button>
+                </div>
+
+            </form>
+
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black py-12 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8 mb-8">
+                <a href="index.html" class="text-2xl font-black tracking-tighter">
+                    APÉ<span class="spotify-green">ARTIST</span>
+                </a>
+                <div class="flex space-x-8 text-gray-500 font-bold text-xs uppercase tracking-widest">
+                    <a href="confidentialite.html" class="hover:text-white transition-colors">Confidentialité</a>
+                    <a href="cgu.html" class="hover:text-white transition-colors">CGU</a>
+                    <a href="contact.html" class="hover:text-white transition-colors">Contact</a>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-all"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-all"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-all"><i class="fa-brands fa-tiktok"></i></a>
+                </div>
+            </div>
+            <div class="text-center text-[10px] text-gray-600 font-bold uppercase tracking-[0.4em]">
+                © 2026 APÉ ARTIST TOGO. TOUS TALENTS RÉSERVÉS.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script de gestion du tableau de bord & mise à jour des paramètres -->
+    <script>
+        // Charger les données sauvegardées ou initialiser
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedName = localStorage.getItem('apeartist_user_name');
+            const savedEmail = localStorage.getItem('apeartist_user_email');
+            const savedPhone = localStorage.getItem('apeartist_user_phone');
+            const savedRole = localStorage.getItem('apeartist_user_role');
+            const savedCity = localStorage.getItem('apeartist_user_city');
+            const savedBio = localStorage.getItem('apeartist_user_bio');
+            const savedAvatar = localStorage.getItem('apeartist_user_avatar');
+
+            if (savedName) {
+                document.getElementById('headerGreeting').textContent = savedName;
+                document.getElementById('navUserName').textContent = savedName;
+                const parts = savedName.split(' ');
+                document.getElementById('settingFirstName').value = parts[0] || '';
+                document.getElementById('settingLastName').value = parts.slice(1).join(' ') || '';
+            }
+
+            if (savedEmail) {
+                document.getElementById('settingEmail').value = savedEmail;
+            }
+
+            if (savedPhone) {
+                document.getElementById('settingPhone').value = savedPhone;
+            }
+
+            if (savedRole) {
+                document.getElementById('headerRole').textContent = savedRole;
+                document.getElementById('settingRole').value = savedRole;
+            }
+
+            if (savedCity) {
+                document.getElementById('headerCity').textContent = savedCity;
+                document.getElementById('settingCity').value = savedCity;
+            }
+
+            if (savedBio) {
+                document.getElementById('settingBio').value = savedBio;
+            }
+
+            if (savedAvatar) {
+                document.getElementById('navAvatar').src = savedAvatar;
+                document.getElementById('headerAvatar').src = savedAvatar;
+                document.getElementById('formAvatarPreview').src = savedAvatar;
+            }
+        });
+
+        // Gestion des Onglets
+        function switchTab(tabId) {
+            // Masquer tous les contenus
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            
+            // Désactiver tous les boutons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+                btn.classList.add('bg-white/5', 'text-gray-400');
+            });
+
+            // Afficher l'onglet actif
+            const activeTab = document.getElementById(tabId);
+            if (activeTab) {
+                activeTab.classList.remove('hidden');
+            }
+
+            // Mettre en surbrillance le bouton
+            let btnId = 'btnTabOverview';
+            if (tabId === 'tabBookings') btnId = 'btnTabBookings';
+            else if (tabId === 'tabFavorites') btnId = 'btnTabFavorites';
+            else if (tabId === 'tabSettings') btnId = 'btnTabSettings';
+
+            const activeBtn = document.getElementById(btnId);
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+                activeBtn.classList.remove('bg-white/5', 'text-gray-400');
+            }
+
+            window.scrollTo({ top: 200, behavior: 'smooth' });
+        }
+
+        // Toggle tag badges
+        function toggleTag(el) {
+            el.classList.toggle('selected');
+        }
+
+        // Simuler changement d'avatar
+        const sampleAvatars = [
+            'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=250&q=80',
+            'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=250&q=80',
+            'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=250&q=80',
+            'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80'
+        ];
+        let avatarIndex = 0;
+
+        function changeAvatarDemo() {
+            avatarIndex = (avatarIndex + 1) % sampleAvatars.length;
+            const newUrl = sampleAvatars[avatarIndex];
+            document.getElementById('navAvatar').src = newUrl;
+            document.getElementById('headerAvatar').src = newUrl;
+            document.getElementById('formAvatarPreview').src = newUrl;
+            localStorage.setItem('apeartist_user_avatar', newUrl);
+            showToast('Photo de profil mise à jour !');
+        }
+
+        function resetAvatar() {
+            const defaultUrl = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80';
+            document.getElementById('navAvatar').src = defaultUrl;
+            document.getElementById('headerAvatar').src = defaultUrl;
+            document.getElementById('formAvatarPreview').src = defaultUrl;
+            localStorage.setItem('apeartist_user_avatar', defaultUrl);
+            showToast('Photo de profil réinitialisée.');
+        }
+
+        // Sauvegarde des paramètres
+        function saveUserSettings(event) {
+            event.preventDefault();
+            
+            const firstName = document.getElementById('settingFirstName').value.trim();
+            const lastName = document.getElementById('settingLastName').value.trim();
+            const fullName = `${firstName} ${lastName}`.trim();
+            const email = document.getElementById('settingEmail').value.trim();
+            const phone = document.getElementById('settingPhone').value.trim();
+            const role = document.getElementById('settingRole').value;
+            const city = document.getElementById('settingCity').value.trim();
+            const bio = document.getElementById('settingBio').value.trim();
+            const newPass = document.getElementById('settingNewPass').value;
+            const confirmPass = document.getElementById('settingConfirmPass').value;
+
+            if (newPass && newPass !== confirmPass) {
+                alert('Le nouveau mot de passe et sa confirmation ne correspondent pas.');
+                return;
+            }
+
+            // Enregistrer dans localStorage
+            localStorage.setItem('apeartist_user_name', fullName);
+            localStorage.setItem('apeartist_user_email', email);
+            localStorage.setItem('apeartist_user_phone', phone);
+            localStorage.setItem('apeartist_user_role', role);
+            localStorage.setItem('apeartist_user_city', city);
+            localStorage.setItem('apeartist_user_bio', bio);
+
+            // Mettre à jour l'interface immédiatement
+            document.getElementById('headerGreeting').textContent = fullName;
+            document.getElementById('navUserName').textContent = fullName;
+            document.getElementById('headerRole').textContent = role;
+            document.getElementById('headerCity').textContent = city;
+
+            const btn = document.getElementById('saveSettingsBtn');
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Enregistrement...';
+            
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fa-solid fa-check mr-2"></i> Modifications enregistrées !';
+                showToast('Vos informations et paramètres ont été mis à jour avec succès !');
+                setTimeout(() => {
+                    btn.innerHTML = '<i class="fa-solid fa-floppy-disk mr-2"></i> Enregistrer les modifications';
+                }, 2000);
+            }, 500);
+        }
+
+        // Afficher Toast
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMessage').textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Déconnexion
+        function logoutUser() {
+            if (confirm('Voulez-vous vraiment vous déconnecter ?')) {
+                localStorage.removeItem('apeartist_logged_in');
+                window.location.href = 'login.html';
+            }
+        }
+    </script>
+</body>
+</html>
